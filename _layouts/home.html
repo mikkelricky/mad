@@ -1,0 +1,43 @@
+---
+layout: default
+---
+
+<div class="home">
+  {%- if site.recipes.size > 0 -%}
+    <ul class="post-list">
+			{% assign recipes = site.recipes | sort: 'title' %}
+      {%- for recipe in recipes -%}
+      <li>
+					{% comment %}
+					{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+					<span class="post-meta">{{ recipe.date | date: date_format }}</span>
+					{% endcomment %}
+					<h1>
+						<a class="post-link" href="{{ recipe.url | relative_url }}">
+							{{ recipe.title | escape }}
+						</a>
+					</h1>
+					{% comment %}
+					{{ recipe.excerpt }}
+					{% endcomment %}
+      </li>
+      {%- endfor -%}
+    </ul>
+
+		{% comment %}
+		{% for category in site.categories %}
+		<h3>{{ category[0] }}</h3>
+		<ul>
+			{% for post in category[1] %}
+      <li><a href="{{ recipe.url }}">{{ recipe.title }}</a></li>
+			{% endfor %}
+		</ul>
+		{% endfor %}
+		{% endcomment %}
+
+		{% comment %}
+    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+		{% endcomment %}
+  {%- endif -%}
+
+</div>
